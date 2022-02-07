@@ -5,9 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { TareasService } from './tareas.service';
-import { AgregarTareaComponent } from './agregar-tarea/agregar-tarea.component';
+
+import { AgregarTareaComponent } from './components/agregar-tarea/agregar-tarea.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EditarTareaComponent } from './editar-tarea/editar-tarea.component';
+import { EditarTareaComponent } from './components/editar-tarea/editar-tarea.component';
 
 
 

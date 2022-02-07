@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute,Params} from '@angular/router';
-import { Fecha } from '../app.fecha.model';
-import { Tarea } from '../app.tarea.model';
-import { TareasService } from '../tareas.service';
+import { Fecha } from '../../app.fecha.model';
+import { Tarea } from '../../app.tarea.model';
+import { TareasService } from '../../tareas.service';
 
 
 
