@@ -1,8 +1,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup,Validators } from '@angular/forms';
-import { Fecha } from '../../app.fecha.model';
-import { Tarea } from '../../app.tarea.model';
+import { Fecha } from 'src/app/modelos/app.fecha.model';
+import { Tarea } from 'src/app/modelos/app.tarea.model';
 
 import { TareasService } from 'src/app/servicios/tareas/tareas.service';
 
