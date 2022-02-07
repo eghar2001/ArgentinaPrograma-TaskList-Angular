@@ -1,0 +1,60 @@
+<form [formGroup]="agregarTarea"  class="container border border-3 rounded p-3">
+    <div>
+        <label for="tituloTarea" class="form-label">Titulo de la tarea:</label>
+        <input type="text" class="form-control" id="tituloTarea" formControlName="titulo">
+    </div>
+    <div  *ngIf="Titulo?.hasError('required') && Titulo?.touched" id="cartelError" class="form-text text-danger">
+        El titulo es requerido
+    </div>
+    <div class="row mt-2">
+        <div class="col-4">
+            <label for="diaLimite" class="form-label">Dia:</label>
+            <input type="number" class="form-control" id="diaLimite" formControlName="diaLimite">
+            <div *ngIf="Dia?.errors && Dia?.touched">
+                <div *ngIf="Dia?.hasError('required')" class="form-text text-danger">
+                    El dia es requerido
+                </div>
+                <div *ngIf="Dia?.hasError('min')" class="form-text text-danger">
+                    El dia debe ser mayor a 1
+                </div>
+                <div *ngIf="Dia?.hasError('max')" class="form-text text-danger">
+                    El dia debe ser menor a 31
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <label for="mesLimite" class="form-label">Mes:</label>
+            <input type="number" class="form-control" id="mesLimite" formControlName="mesLimite">
+            <div *ngIf="Mes?.errors && Mes?.touched">
+                <div *ngIf="Mes?.hasError('required')" class="form-text text-danger">
+                    El mes es requerido
+                </div>
+                <div *ngIf="Mes?.hasError('min')" class="form-text text-danger">
+                    El mes debe ser mayor a 1
+                </div>
+                <div *ngIf="Mes?.hasError('max')" class="form-text text-danger">
+                    El mes debe ser menor a 31
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <label for="anioLimite" class="form-label">Año:</label>
+            <input type="number" class="form-control" id="anioLimite" formControlName="anioLimite">
+            <div *ngIf="Anio?.errors && Anio?.touched">
+                <div *ngIf="Anio?.hasError('required')" class="form-text text-danger">
+                    El año es requerido
+                </div>
+                <div *ngIf="Anio?.hasError('min')" class="form-text text-danger">
+                    El año debe ser mayor a 1
+                </div>
+                <div *ngIf="Anio?.hasError('max')" class="form-text text-danger">
+                    El año debe ser menor a 31
+                </div>
+            </div>
+        </div>
+    </div>
+  
+
+        <button type="submit" (click)="enviar($event)" class="btn btn-success mt-3">Agregar</button>
+
+</form>
