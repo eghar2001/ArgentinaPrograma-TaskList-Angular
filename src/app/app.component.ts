@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Tarea } from './app.tarea.model';
-import { TareasService } from './tareas.service';
+import { TareasService } from './servicios/tareas/tareas.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

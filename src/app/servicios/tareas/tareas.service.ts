@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Fecha } from './app.fecha.model';
+import { Fecha } from '../../app.fecha.model';
 
-import { Tarea } from './app.tarea.model';
+import { Tarea } from '../../app.tarea.model';
 
 @Injectable({
   providedIn: 'root'

@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { TareasService } from './tareas.service';
+import { TareasService } from './servicios/tareas/tareas.service';
 
 import { AgregarTareaComponent } from './components/agregar-tarea/agregar-tarea.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';

@@ -4,7 +4,7 @@ import { FormBuilder, FormControl, FormGroup,Validators } from '@angular/forms';
 import { Fecha } from '../../app.fecha.model';
 import { Tarea } from '../../app.tarea.model';
 
-import { TareasService } from 'src/app/tareas.service';
+import { TareasService } from 'src/app/servicios/tareas/tareas.service';
 
 
 @Component({
