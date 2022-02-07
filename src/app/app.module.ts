@@ -9,6 +9,8 @@ import { TareasService } from './servicios/tareas/tareas.service';
 import { AgregarTareaComponent } from './components/agregar-tarea/agregar-tarea.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditarTareaComponent } from './components/editar-tarea/editar-tarea.component';
+import { TareaComponent } from './components/tarea/tarea.component';
+
 
 
 
@@ -17,7 +19,8 @@ import { EditarTareaComponent } from './components/editar-tarea/editar-tarea.com
   declarations: [
     AppComponent,    
     AgregarTareaComponent,    
-    EditarTareaComponent,
+    EditarTareaComponent, 
+    TareaComponent
   ],
   imports: [
     BrowserModule,

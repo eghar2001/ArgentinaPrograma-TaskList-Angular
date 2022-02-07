@@ -16,12 +16,15 @@ export class AppComponent {
     this.formActivado=false;
   }
   formActivado:boolean;
+  public cambiaBoton(){
+    this.formActivado=true;
+  }
   mostrarAddTask(){
     this.rutas.navigate(['/addTask']);
     this.formActivado=true
   }
   cerrarAddTask(){
-    this.rutas.navigate(['']);
+   
     this.formActivado=false
   }
   eliminaTarea(index:number){

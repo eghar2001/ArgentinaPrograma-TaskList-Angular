@@ -9,19 +9,7 @@
     </div >
     <router-outlet *ngIf="formActivado" id="routerOutlet"></router-outlet> 
     <div class="mt-3">
-        <div class="container border border-3 border-top-0 border-end-0 border-bottom-0 rounded border-warning  bg-light py-1 mt-2" *ngFor="let tarea of tareas; let i=index" >
-            <div class="row justify-content-around">
-                <div class="col-9 justify-content-start"> 
-                    <h3 class="d-inline-block">{{tarea.getTitulo()}}</h3>
-                </div>
-                <div class="col-3">
-                <i class="bx bxs-trash bx-md bx-tada-hover text-danger" (click)="eliminaTarea(i)"></i>
-                <i class="bx bxs-edit bx-md bx-tada-hover text-primary" (click)="editarTarea(i)" ></i>
-                </div>
-            </div>
-            <p>Hasta: {{tarea.getFechaLimite().getFullDateString()}}</p>
-        </div>
+        <app-tarea *ngFor="let tarea of tareas; let i=index" [unaTarea]="tarea" [index]="i" (clickEditar)="editarTarea($event)"></app-tarea>
 
     </div>
-    <footer></footer>
   </div>
