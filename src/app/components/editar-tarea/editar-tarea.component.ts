@@ -16,6 +16,7 @@ export class EditarTareaComponent implements OnInit {
   modificarTarea:FormGroup;
   tarea:Tarea;
   index:number;
+  diasMaximos:number=0;
   constructor(private formBuilder:FormBuilder,private misTareas:TareasService,private parametroRutas:ActivatedRoute) { 
     this.parametroRutas.params.subscribe((params:Params)=>
     {const id = parseInt(params['id'].toString())
@@ -24,10 +25,13 @@ export class EditarTareaComponent implements OnInit {
     })
     this.modificarTarea = this.formBuilder.group({
       titulo:[this.tarea.getTitulo(),[Validators.required]],
-      diaLimite:[this.tarea.getFechaLimite().getDia(),[Validators.required,Validators.min(1),Validators.max(31)]],
+      diaLimite:[this.tarea.getFechaLimite().getDia(),[Validators.required,Validators.min(1),Validators.max(this.diasMaximos)]],
       mesLimite:[this.tarea.getFechaLimite().getMes(),[Validators.required,Validators.min(1),Validators.max(12)]],
       anioLimite:[this.tarea.getFechaLimite().getAnio(),[Validators.required,Validators.min(1),Validators.max(2022)]]
     })
+  }
+  actualizaDiasMaximos(){
+    this.diasMaximos = Fecha.cantidadDias(this.Mes?.value)
   }
   get Titulo(){
     return this.modificarTarea.get("titulo")

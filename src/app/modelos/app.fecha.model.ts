@@ -16,6 +16,22 @@ export class Fecha{
     public getAnio(){
         return this.anio;
     }
+    static cantidadDias(mes:number):number{
+        const dias30:number[] = [4,6,9,11];
+        const dias31:number[] = [1,3,5,7,8,10,12]
+        if (dias30.includes(mes)){
+            return 31;
+        }
+        else if (mes ===2){
+            return 28;
+        }
+        else if(dias31.includes(mes)){
+            return 30;
+        }
+        else{
+            return 0;
+        }
+    }
     public getMesString(){
         let mesString:string;
         switch (this.mes){

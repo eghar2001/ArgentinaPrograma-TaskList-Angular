@@ -14,13 +14,18 @@ import { TareasService } from 'src/app/servicios/tareas/tareas.service';
 })
 export class AgregarTareaComponent implements OnInit {
   agregarTarea:FormGroup;
+  diasMaximos:number=0;
   constructor(private formBuilder:FormBuilder,private misTareas:TareasService) { 
+
     this.agregarTarea = this.formBuilder.group({
       titulo:['',[Validators.required]],
-      diaLimite:[null,[Validators.required,Validators.min(1),Validators.max(31)]],
+      diaLimite:[null,[Validators.required,Validators.min(1),Validators.max(this.diasMaximos)]],
       mesLimite:[null,[Validators.required,Validators.min(1),Validators.max(12)]],
       anioLimite:[null,[Validators.required,Validators.min(1),Validators.max(2022)]]
     })
+  }
+  actualizaDiasMaximos(){
+    this.diasMaximos = Fecha.cantidadDias(this.Mes?.value);
   }
   get Titulo(){
     return this.agregarTarea.get("titulo")

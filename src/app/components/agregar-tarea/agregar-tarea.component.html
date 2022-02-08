@@ -8,8 +8,23 @@
     </div>
     <div class="row mt-2">
         <div class="col-4">
+            <label for="mesLimite" class="form-label">Mes:</label>
+            <input type="number" class="form-control" id="mesLimite" formControlName="mesLimite" > 
+            <div *ngIf="Mes?.errors && Mes?.touched" >
+                <div *ngIf="Mes?.hasError('required')" class="form-text text-danger">
+                    El mes es requerido
+                </div>
+                <div *ngIf="Mes?.hasError('min')" class="form-text text-danger">
+                    El mes debe ser mayor a 1
+                </div>
+                <div *ngIf="Mes?.hasError('max')" class="form-text text-danger">
+                    El mes debe ser menor a 12
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
             <label for="diaLimite" class="form-label">Dia:</label>
-            <input type="number" class="form-control" id="diaLimite" formControlName="diaLimite">
+            <input type="number" class="form-control" id="diaLimite" formControlName="diaLimite" (focus)="actualizaDiasMaximos()"> 
             <div *ngIf="Dia?.errors && Dia?.touched">
                 <div *ngIf="Dia?.hasError('required')" class="form-text text-danger">
                     El dia es requerido
@@ -18,25 +33,11 @@
                     El dia debe ser mayor a 1
                 </div>
                 <div *ngIf="Dia?.hasError('max')" class="form-text text-danger">
-                    El dia debe ser menor a 31
+                    El dia debe ser menor a {{diasMaximos}}
                 </div>
             </div>
         </div>
-        <div class="col-4">
-            <label for="mesLimite" class="form-label">Mes:</label>
-            <input type="number" class="form-control" id="mesLimite" formControlName="mesLimite">
-            <div *ngIf="Mes?.errors && Mes?.touched">
-                <div *ngIf="Mes?.hasError('required')" class="form-text text-danger">
-                    El mes es requerido
-                </div>
-                <div *ngIf="Mes?.hasError('min')" class="form-text text-danger">
-                    El mes debe ser mayor a 1
-                </div>
-                <div *ngIf="Mes?.hasError('max')" class="form-text text-danger">
-                    El mes debe ser menor a 31
-                </div>
-            </div>
-        </div>
+
         <div class="col-4">
             <label for="anioLimite" class="form-label">Año:</label>
             <input type="number" class="form-control" id="anioLimite" formControlName="anioLimite">
