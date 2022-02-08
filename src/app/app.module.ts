@@ -10,6 +10,9 @@ import { AgregarTareaComponent } from './components/agregar-tarea/agregar-tarea.
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditarTareaComponent } from './components/editar-tarea/editar-tarea.component';
 import { TareaComponent } from './components/tarea/tarea.component';
+import { HeaderComponent } from './components/header/header.component';
+import { ListaTareasComponent } from './components/lista-tareas/lista-tareas.component';
+
 
 
 
@@ -20,7 +23,9 @@ import { TareaComponent } from './components/tarea/tarea.component';
     AppComponent,    
     AgregarTareaComponent,    
     EditarTareaComponent, 
-    TareaComponent
+    TareaComponent,
+    HeaderComponent,
+    ListaTareasComponent
   ],
   imports: [
     BrowserModule,

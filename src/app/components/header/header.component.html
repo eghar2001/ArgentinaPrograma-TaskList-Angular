@@ -1,0 +1,7 @@
+<header class="row justify-content-between mb-2">
+    <h1 class="col">My Task List</h1>
+    <div class="col d-flex justify-content-end">
+      <button  *ngIf="!formActivado" class=" btn btn-lg btn-success w-auto" (click)="mostrarAddTask()">Agregar Tarea</button>
+      <button   *ngIf="formActivado" class=" btn btn-lg btn-danger w-auto" (click)="cerrarAddTask()">Cerrar</button>
+    </div>    
+</header >

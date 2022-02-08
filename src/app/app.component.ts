@@ -19,6 +19,9 @@ export class AppComponent {
   public cambiaBoton(){
     this.formActivado=true;
   }
+  estadoFormulario(estado:boolean){
+    this.formActivado=estado;
+  }
   mostrarAddTask(){
     this.rutas.navigate(['/addTask']);
     this.formActivado=true
@@ -30,9 +33,8 @@ export class AppComponent {
   eliminaTarea(index:number){
     this.misTareas.eliminaTarea(index)
   }
-  editarTarea(index:number){
+  editarTarea(){
     this.formActivado=true;
-    this.rutas.navigate(['/edit',index])
     
   }
 
