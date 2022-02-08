@@ -9,7 +9,7 @@
     <div class="row mt-2">
         <div class="col-4">
             <label for="mesLimite" class="form-label">Mes:</label>
-            <input type="number" class="form-control" id="mesLimite" formControlName="mesLimite" > 
+            <input type="number" class="form-control" id="mesLimite" formControlName="mesLimite"(blur)="actualizaDiasMaximos()" > 
             <div *ngIf="Mes?.errors && Mes?.touched" >
                 <div *ngIf="Mes?.hasError('required')" class="form-text text-danger">
                     El mes es requerido
@@ -24,17 +24,21 @@
         </div>
         <div class="col-4">
             <label for="diaLimite" class="form-label">Dia:</label>
-            <input type="number" class="form-control" id="diaLimite" formControlName="diaLimite" (focus)="actualizaDiasMaximos()"> 
-            <div *ngIf="Dia?.errors && Dia?.touched">
+            <input type="number" class="form-control" id="diaLimite" formControlName="diaLimite" > 
+            <div *ngIf="(Dia?.errors && Dia?.touched)||(Dia?.touched&&Dia?.value>diasMaximos)">
                 <div *ngIf="Dia?.hasError('required')" class="form-text text-danger">
                     El dia es requerido
                 </div>
                 <div *ngIf="Dia?.hasError('min')" class="form-text text-danger">
                     El dia debe ser mayor a 1
                 </div>
-                <div *ngIf="Dia?.hasError('max')" class="form-text text-danger">
+                <div *ngIf="Dia?.value>diasMaximos" class="form-text text-danger"> 
                     El dia debe ser menor a {{diasMaximos}}
                 </div>
+                <!--
+                    NOTA: Esta forma para validar los dias maximos esta ya que este se asigna dinamicamente dependiendo de lo que se ingrese en mes
+                            Al el Validator estar en el constructor, toma solamente el valor inicial de diasMaximos, lo cual da error, ya que este varia
+                -->
             </div>
         </div>
 

@@ -25,15 +25,15 @@
         <div class="col-4">
             <label for="diaLimite" class="form-label">Dia:</label>
             <input type="number" class="form-control" id="diaLimite" formControlName="diaLimite">
-            <div *ngIf="Dia?.errors && Dia?.touched">
+            <div *ngIf="(Dia?.errors && Dia?.touched) || (Dia?.touched && Dia?.value>diasMaximos)">
                 <div *ngIf="Dia?.hasError('required')" class="form-text text-danger">
                     El dia es requerido
                 </div>
                 <div *ngIf="Dia?.hasError('min')" class="form-text text-danger">
                     El dia debe ser mayor a 1
                 </div>
-                <div *ngIf="Dia?.hasError('max')" class="form-text text-danger">
-                    El dia debe ser menor a 31
+                <div *ngIf="Dia?.value>diasMaximos" class="form-text text-danger">
+                    El dia debe ser menor a {{diasMaximos}}
                 </div>
             </div>
         </div>
