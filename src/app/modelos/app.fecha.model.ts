@@ -32,6 +32,45 @@ export class Fecha{
             return 0;
         }
     }
+    public diasDiferencia (fecha:Fecha):number{
+        const meses:number[] =[1,2,3,4,5,6,7,8,9,10,11,12];
+        const esBisiesto = (anio:number) => {
+            return ((anio%4===0 && !(anio%100===0) ) || (anio%400===0))
+        }
+        let aniosMedios:number[]=[];
+        let mesesMedios:number[]=[];
+        if (fecha.getAnio()>this.anio){
+            for(let anio = this.anio +1;anio<fecha.getAnio();anio++){
+                aniosMedios.push(anio)
+            }            
+            let mes:number = this.mes ;
+            while (mes!==fecha.getMes()){
+                mesesMedios.push(mes);
+                mes = mes === 12 ? 1: mes+1;
+            }
+
+
+
+        }
+        else if(this.anio>fecha.getAnio()){
+            for(let i = fecha.getAnio() +1;i<this.anio;i++){
+                aniosMedios.push(i)
+            }
+            let mes:number = fecha.getMes();
+            while (mes!==this.mes){
+                mesesMedios.push(mes);
+                mes = mes === 12 ? 1: mes+1;
+            }
+        }
+
+        let diasDiferencia = aniosMedios.reduce((acum,anio)=>{return acum += (esBisiesto(anio)?366:365)}, 0);//sumo años diferencia
+    
+        diasDiferencia += mesesMedios.reduce((acum,mes)=>{return acum += Fecha.cantidadDias(mes)},0);//sumo meses diferencia
+       
+        diasDiferencia  += Math.abs(this.dia-fecha.getDia());
+        return diasDiferencia;
+
+    }
     public getMesString(){
         let mesString:string;
         switch (this.mes){

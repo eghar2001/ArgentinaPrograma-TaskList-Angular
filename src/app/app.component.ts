@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Fecha } from './modelos/app.fecha.model';
 import { Tarea } from './modelos/app.tarea.model';
 import { TareasService } from './servicios/tareas/tareas.service';
 @Component({
@@ -34,7 +35,12 @@ export class AppComponent {
     this.misTareas.eliminaTarea(index)
   }
   editarTarea(){
-    this.formActivado=true;
+    this.formActivado=true; 
+  }
+  calcularDias(){
+    const fecha1 = new Fecha(24,12,1889);
+    const fecha2 = new Fecha(8,2,2022);
+    alert(fecha1.diasDiferencia(fecha2));
     
   }
 
