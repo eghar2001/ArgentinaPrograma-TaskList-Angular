@@ -15,17 +15,23 @@ import { TareasService } from 'src/app/servicios/tareas/tareas.service';
 export class AgregarTareaComponent implements OnInit {
   agregarTarea:FormGroup;
   diasMaximos:number=31;
+  fechaActual:Fecha;
   actualizaDiasMaximos(){
     this.diasMaximos = Fecha.cantidadDias(this.Mes?.value);
-    console.log(this.diasMaximos);
+ 
   }
-  constructor(private formBuilder:FormBuilder,private misTareas:TareasService) { 
+  ngOnInit(): void {
+    
+  }
+ 
 
+  constructor(private formBuilder:FormBuilder,private misTareas:TareasService) { 
+    this.fechaActual = Fecha.FechaActual;
     this.agregarTarea = this.formBuilder.group({
       titulo:['',[Validators.required]],
       diaLimite:[null,[Validators.required,Validators.min(1)]],
       mesLimite:[null,[Validators.required,Validators.min(1),Validators.max(12)]],
-      anioLimite:[null,[Validators.required,Validators.min(1),Validators.max(2022)]]
+      anioLimite:[null,[Validators.required,Validators.min(this.fechaActual.getAnio())]]
     })
   }
   
@@ -41,17 +47,59 @@ export class AgregarTareaComponent implements OnInit {
   get Anio(){
     return this.agregarTarea.get("anioLimite")
   }
-
-  ngOnInit(): void {
+ 
+  mesValido(mes:number,anio:number):boolean{
+    //Retorna booleano diciendo si el mes ingresado es valido
+    if (anio>this.fechaActual.getAnio()){
+        return true;
+    }
+    else if(anio<this.fechaActual.getAnio()){
+        return false;
+    }
+    else{
+        return mes>= this.fechaActual.getMes()
+    }
   }
+  diaValido(dia:number,mes:number,anio:number):boolean{
+    let resultado: boolean
+    if (anio<Fecha.FechaActual.getAnio()){
+       resultado = false;
+        
+    }
+    else if(anio>Fecha.FechaActual.getAnio()){
+        resultado=true;
+        
+    }
+    else{
+        if(mes < Fecha.FechaActual.getMes()){
+          resultado= false;
+          
+        }
+        else if(mes > Fecha.FechaActual.getMes()){
+          resultado= true
+          
+        }
+        else{
+            resultado = (dia >= Fecha.FechaActual.getDia())        
+           
+        }
+    }
+    return resultado;
+        
+}
+
+  
   enviar(evento:Event){
     evento.preventDefault;
-    if(this.agregarTarea.valid){
+    const anio:number = this.Anio?.value;
+    const mes:number = this.Mes?.value;
+    const dia:number = this.Dia?.value;
+    
+    
+    if(this.agregarTarea.valid &&this.mesValido(mes,anio) &&  (this.diaValido(dia,mes,anio)) )  {
       const titulo:string = this.Titulo?.value;
-      const dia:number = parseInt(this.Dia?.value);
-      const mes:number = parseInt(this.Mes?.value);
-      const anio:number = parseInt(this.Anio?.value);
-      const tarea:Tarea = new Tarea(titulo, new Fecha(dia,mes,anio));
+      const fechaIngresada = new Fecha(dia,mes,anio);
+      const tarea:Tarea = new Tarea(titulo, fechaIngresada);
       this.misTareas.agregarTarea(tarea);
     }
     else{

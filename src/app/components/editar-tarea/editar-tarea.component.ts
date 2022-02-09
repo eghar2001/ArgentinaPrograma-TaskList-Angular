@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute,Params} from '@angular/router';
@@ -17,6 +18,7 @@ export class EditarTareaComponent implements OnInit {
   tarea:Tarea;
   index:number;
   diasMaximos:number=0;
+  fechaActual:Fecha=Fecha.FechaActual;
   constructor(private formBuilder:FormBuilder,private misTareas:TareasService,private parametroRutas:ActivatedRoute) { 
     this.parametroRutas.params.subscribe((params:Params)=>
     {const id = parseInt(params['id'].toString())
@@ -27,7 +29,7 @@ export class EditarTareaComponent implements OnInit {
       titulo:[this.tarea.getTitulo(),[Validators.required]],
       diaLimite:[this.tarea.getFechaLimite().getDia(),[Validators.required,Validators.min(1)]],
       mesLimite:[this.tarea.getFechaLimite().getMes(),[Validators.required,Validators.min(1),Validators.max(12)]],
-      anioLimite:[this.tarea.getFechaLimite().getAnio(),[Validators.required,Validators.min(1),Validators.max(2022)]]
+      anioLimite:[this.tarea.getFechaLimite().getAnio(),[Validators.required,Validators.min(this.fechaActual.getAnio())]]
     })
   }
   actualizaDiasMaximos(){
@@ -45,16 +47,56 @@ export class EditarTareaComponent implements OnInit {
   get Anio(){
     return this.modificarTarea.get("anioLimite")
   }
-
+  
+  mesValido(mes:number,anio:number):boolean{
+    //Retorna booleano diciendo si el mes ingresado es valido
+    if (anio>this.fechaActual.getAnio()){
+        return true;
+    }
+    else if(anio<this.fechaActual.getAnio()){
+        return false;
+    }
+    else{
+        return mes>= this.fechaActual.getMes()
+    }
+  }
+  diaValido(dia:number,mes:number,anio:number):boolean{
+    let resultado: boolean
+    if (anio<Fecha.FechaActual.getAnio()){
+       resultado = false;
+        
+    }
+    else if(anio>Fecha.FechaActual.getAnio()){
+        resultado=true;
+        
+    }
+    else{
+        if(mes < Fecha.FechaActual.getMes()){
+          resultado= false;
+          
+        }
+        else if(mes > Fecha.FechaActual.getMes()){
+          resultado= true
+          
+        }
+        else{
+            resultado = (dia >= Fecha.FechaActual.getDia())        
+           
+        }
+    }
+    return resultado;
+        
+}
   ngOnInit(): void {
   }
   enviar(evento:Event){
     evento.preventDefault;
-    if(this.modificarTarea.valid){
+    const dia:number = parseInt(this.Dia?.value);
+    const mes:number = parseInt(this.Mes?.value);
+    const anio:number = parseInt(this.Anio?.value);
+    if(this.modificarTarea.valid && this.mesValido(mes,anio) && this.diaValido(dia,mes,anio)){
       const titulo:string = this.Titulo?.value;
-      const dia:number = parseInt(this.Dia?.value);
-      const mes:number = parseInt(this.Mes?.value);
-      const anio:number = parseInt(this.Anio?.value);
+      
       const tarea:Tarea = new Tarea(titulo, new Fecha(dia,mes,anio));
       this.misTareas.editarTarea(this.index,tarea);
       

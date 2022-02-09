@@ -37,12 +37,7 @@ export class AppComponent {
   editarTarea(){
     this.formActivado=true; 
   }
-  calcularDias(){
-    const fecha1 = new Fecha(24,12,1889);
-    const fecha2 = new Fecha(8,2,2022);
-    alert(fecha1.diasDiferencia(fecha2));
-    
-  }
+
 
 }
 

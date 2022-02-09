@@ -3,6 +3,6 @@
     <app-header [formActivado]="formActivado" (botonFormulario)="estadoFormulario($event)"></app-header>
     <router-outlet *ngIf="formActivado" id="routerOutlet"></router-outlet> 
     <app-lista-tareas (activaFormulario)="editarTarea()"></app-lista-tareas>
-    <button (click)="calcularDias()">calcular dias</button>
+    
   </div>
 

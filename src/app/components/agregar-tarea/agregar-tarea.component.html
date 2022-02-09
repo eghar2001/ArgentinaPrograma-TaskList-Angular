@@ -8,14 +8,30 @@
     </div>
     <div class="row mt-2">
         <div class="col-4">
+            <label for="anioLimite" class="form-label">Año:</label>
+            <input type="number" class="form-control" id="anioLimite" formControlName="anioLimite">
+            <div *ngIf="Anio?.errors && Anio?.touched">
+                <div *ngIf="Anio?.hasError('required')" class="form-text text-danger">
+                    El año es requerido
+                </div>
+                <div *ngIf="Anio?.hasError('min')" class="form-text text-danger">
+                    El año debe ser mayor a {{fechaActual.getAnio()}}
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-4">
             <label for="mesLimite" class="form-label">Mes:</label>
             <input type="number" class="form-control" id="mesLimite" formControlName="mesLimite"(blur)="actualizaDiasMaximos()" > 
-            <div *ngIf="Mes?.errors && Mes?.touched" >
+            <div *ngIf="Mes?.touched && (Mes?.errors || !mesValido(Mes?.value,Anio?.value) )" >
                 <div *ngIf="Mes?.hasError('required')" class="form-text text-danger">
                     El mes es requerido
                 </div>
                 <div *ngIf="Mes?.hasError('min')" class="form-text text-danger">
                     El mes debe ser mayor a 1
+                </div>
+                <div *ngIf="!mesValido(Mes?.value,Anio?.value)" class="form-text text-danger">
+                    El mes debe ser mayor a {{fechaActual.getMes()}}
                 </div>
                 <div *ngIf="Mes?.hasError('max')" class="form-text text-danger">
                     El mes debe ser menor a 12
@@ -25,7 +41,7 @@
         <div class="col-4">
             <label for="diaLimite" class="form-label">Dia:</label>
             <input type="number" class="form-control" id="diaLimite" formControlName="diaLimite" > 
-            <div *ngIf="(Dia?.errors && Dia?.touched)||(Dia?.touched&&Dia?.value>diasMaximos)">
+            <div *ngIf="Dia?.touched&&((Dia?.errors)||(Dia?.value>diasMaximos) || (!diaValido(Dia?.value,Mes?.value,Anio?.value)))">
                 <div *ngIf="Dia?.hasError('required')" class="form-text text-danger">
                     El dia es requerido
                 </div>
@@ -35,6 +51,9 @@
                 <div *ngIf="Dia?.value>diasMaximos" class="form-text text-danger"> 
                     El dia debe ser menor a {{diasMaximos}}
                 </div>
+                <div *ngIf="!diaValido(Dia?.value,Mes?.value,Anio?.value)" class="form-text text-danger"> 
+                    El dia debe ser mayor a {{fechaActual.getDia()}}
+                </div>
                 <!--
                     NOTA: Esta forma para validar los dias maximos esta ya que este se asigna dinamicamente dependiendo de lo que se ingrese en mes
                             Al el Validator estar en el constructor, toma solamente el valor inicial de diasMaximos, lo cual da error, ya que este varia
@@ -42,21 +61,7 @@
             </div>
         </div>
 
-        <div class="col-4">
-            <label for="anioLimite" class="form-label">Año:</label>
-            <input type="number" class="form-control" id="anioLimite" formControlName="anioLimite">
-            <div *ngIf="Anio?.errors && Anio?.touched">
-                <div *ngIf="Anio?.hasError('required')" class="form-text text-danger">
-                    El año es requerido
-                </div>
-                <div *ngIf="Anio?.hasError('min')" class="form-text text-danger">
-                    El año debe ser mayor a 1
-                </div>
-                <div *ngIf="Anio?.hasError('max')" class="form-text text-danger">
-                    El año debe ser menor a 31
-                </div>
-            </div>
-        </div>
+        
     </div>
   
 

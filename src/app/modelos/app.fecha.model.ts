@@ -132,7 +132,44 @@ export class Fecha{
     public getFullDateString():string{
         return `${this.dia} de ${this.getMesString()} del ${this.anio}`
     }
+    
+    public diaValido():boolean{
+        if (this.anio<Fecha.FechaActual.getAnio()){
+            return false
+        }
+        else if(this.anio>Fecha.FechaActual.getAnio()){
+            return true;
+        }
+        else{
+            if(this.mes < Fecha.FechaActual.getMes()){
+                return false;
+            }
+            else if(this.mes > Fecha.FechaActual.getMes()){
+                return true;
+            }
+            else{
+                return this.dia >= Fecha.FechaActual.getMes()
+            }
+        }
+            
+    }
+   
     //Funciones Estaticas
-    static FechaActual:Fecha =  new Fecha((new Date()).getDate(),(new Date()).getMonth()+1, (new Date()).getFullYear())
+    static FechaActual:Fecha =  new Fecha((new Date()).getDate(),(new Date()).getMonth()+1, (new Date()).getFullYear());
+    static anioValido(anio:number):boolean{
+        return anio >= Fecha.FechaActual.getAnio();
+    }
+    static mesValido(mes:number,anio:number):boolean{
+        //Retorna booleano diciendo si el mes ingresado es valido
+        if (anio>Fecha.FechaActual.getAnio()){
+            return true;
+        }
+        else if(anio<Fecha.FechaActual.getAnio()){
+            return false;
+        }
+        else{
+            return mes>= Fecha.FechaActual.getMes()
+        }
+    }
 
 }
