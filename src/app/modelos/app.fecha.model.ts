@@ -132,7 +132,7 @@ export class Fecha{
     public getFullDateString():string{
         return `${this.dia} de ${this.getMesString()} del ${this.anio}`
     }
-
-
+    //Funciones Estaticas
+    static FechaActual:Fecha =  new Fecha((new Date()).getDate(),(new Date()).getMonth()+1, (new Date()).getFullYear())
 
 }

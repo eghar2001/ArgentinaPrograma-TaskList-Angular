@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Fecha } from 'src/app/modelos/app.fecha.model';
 
 
 @Component({
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   @Output() botonFormulario = new EventEmitter<boolean>();
   @Input() formActivado:boolean;
+  fechaActual:Fecha;
   constructor(private misRutas:Router) { 
     
   }
@@ -23,6 +25,7 @@ export class HeaderComponent implements OnInit {
   
 
   ngOnInit(): void {
+      this.fechaActual = Fecha.FechaActual;
   }
 
 }
