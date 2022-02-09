@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+
 import { Fecha } from './modelos/app.fecha.model';
 import { Tarea } from './modelos/app.tarea.model';
 import { TareasService } from './servicios/tareas/tareas.service';
@@ -10,21 +10,29 @@ import { TareasService } from './servicios/tareas/tareas.service';
 })
 export class AppComponent {
   tareas:Tarea[];
-  routerOutlet=document.getElementById('routerOutlet');
+  editar:boolean;
+  formActivado:boolean;
+  index:number;
   
-  constructor(private misTareas:TareasService,private rutas:Router){
+  constructor(private misTareas:TareasService){
     this.tareas=this.misTareas.getTareas();
     this.formActivado=false;
+    this.editar=false;
+    this.index=0;
   }
-  formActivado:boolean;
+  
   public cambiaBoton(){
     this.formActivado=true;
   }
   estadoFormulario(estado:boolean){
+    if(estado){
+      this.editar=false;
+    }
     this.formActivado=estado;
+
   }
   mostrarAddTask(){
-    this.rutas.navigate(['/addTask']);
+
     this.formActivado=true
   }
   cerrarAddTask(){
@@ -34,8 +42,11 @@ export class AppComponent {
   eliminaTarea(index:number){
     this.misTareas.eliminaTarea(index)
   }
-  editarTarea(){
+  editarTarea(index:number){
+    this.index = index;
+    this.editar=true;
     this.formActivado=true; 
+    
   }
 
 

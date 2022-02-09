@@ -1,4 +1,4 @@
 <main class="mt-3">
-    <app-tarea *ngFor="let tarea of tareas; let i=index" [unaTarea]="tarea" [index]="i" (clickEditar)="editarTarea()" [index]="i"></app-tarea>
+    <app-tarea *ngFor="let tarea of tareas; let i=index" [unaTarea]="tarea" [index]="i" (clickEditar)="editarTarea($event)" [index]="i"></app-tarea>
 
 </main>

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+
 import { Tarea } from 'src/app/modelos/app.tarea.model';
 import { TareasService } from 'src/app/servicios/tareas/tareas.service';
 
@@ -10,14 +10,14 @@ import { TareasService } from 'src/app/servicios/tareas/tareas.service';
 })
 export class ListaTareasComponent implements OnInit {
   @Input()
-  @Output() activaFormulario = new EventEmitter();
+  @Output() activaFormulario = new EventEmitter<number>();
   tareas:Tarea[]
-  constructor(private misTareas:TareasService, private rutas:Router) {
+  constructor(private misTareas:TareasService) {
     this.tareas=this.misTareas.getTareas();
    }
-   editarTarea(){
+   editarTarea(index:number){
     
-    this.activaFormulario.emit()
+    this.activaFormulario.emit(index);
  
     
   }

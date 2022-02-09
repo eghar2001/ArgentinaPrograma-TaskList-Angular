@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+
 import { Fecha } from 'src/app/modelos/app.fecha.model';
 
 
@@ -12,12 +12,12 @@ export class HeaderComponent implements OnInit {
   @Output() botonFormulario = new EventEmitter<boolean>();
   @Input() formActivado:boolean;
   fechaActual:Fecha;
-  constructor(private misRutas:Router) { 
+  constructor() { 
     
   }
   mostrarAddTask(){
     this.botonFormulario.emit(true);
-    this.misRutas.navigate(['/addTask']);
+
   }
   cerrarAddTask(){
     this.botonFormulario.emit(false);
