@@ -3,18 +3,42 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup,Validators } from '@angular/forms';
 import { Fecha } from 'src/app/modelos/app.fecha.model';
 import { Tarea } from 'src/app/modelos/app.tarea.model';
-
+import { trigger,style,transition,animate,state } from '@angular/animations';
 import { TareasService } from 'src/app/servicios/tareas/tareas.service';
+
 
 
 @Component({
   selector: 'app-manejo-tareas',
   templateUrl: './manejo-tareas.component.html',
-  styleUrls: ['./manejo-tareas.component.css']
+  styleUrls: ['./manejo-tareas.component.css'],
+  animations:[
+    trigger('openClose',[
+      state('*',style({
+        
+        transform:'translateX(-100%)',
+        
+        
+      })),
+      state('open',style({
+      display:'block',
+        transform:'translateX(0)'
+        
+        
+      })),
+      transition('* => open',[
+        animate('0.5s ease-in')
+      ]),
+      transition('open => *',[
+        animate('0.5s ease-out')
+      ])
+    ])
+  ]
 })
 export class ManejoTareasComponent implements OnInit {
   @Input() editar:boolean;
   @Input() index:number;
+  @Input() animForm:boolean;
   @Output() cierraForm = new EventEmitter();
   manejarTareas:FormGroup;
   diasMaximos:number=31;

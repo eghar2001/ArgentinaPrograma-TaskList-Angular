@@ -1,15 +1,16 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
+import { trigger,style,transition,animate,state } from '@angular/animations';
 import { Tarea } from 'src/app/modelos/app.tarea.model';
 import { TareasService } from 'src/app/servicios/tareas/tareas.service';
 
 @Component({
   selector: 'app-lista-tareas',
   templateUrl: './lista-tareas.component.html',
-  styleUrls: ['./lista-tareas.component.css']
+  styleUrls: ['./lista-tareas.component.css'],
+ 
 })
 export class ListaTareasComponent implements OnInit {
-  @Input()
+  @Input() animForm:boolean;
   @Output() activaFormulario = new EventEmitter<number>();
   tareas:Tarea[]
   constructor(private misTareas:TareasService) {

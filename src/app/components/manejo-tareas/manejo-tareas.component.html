@@ -1,4 +1,4 @@
-<form [formGroup]="manejarTareas" class="container border border-3 rounded p-3">
+<form [@openClose]="animForm?'open':'closed'" [formGroup]="manejarTareas" class="container border border-3 rounded p-3">
     <div>
         <label for="tituloTarea" class="form-label">Titulo de la tarea:</label>
         <input type="text" class="form-control" id="tituloTarea" formControlName="titulo">

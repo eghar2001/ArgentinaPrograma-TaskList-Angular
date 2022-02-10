@@ -1,0 +1,12 @@
+.prioridad{
+    width:100%;
+    height:100%;
+    background-color: red;
+    z-index:20000;
+}
+.no-visible{
+    visibility:hidden;
+}
+.relativo{
+    position:relative;
+}
