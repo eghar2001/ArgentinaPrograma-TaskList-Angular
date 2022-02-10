@@ -3,6 +3,5 @@
     <app-header [formActivado]="formActivado" (botonFormulario)="estadoFormulario($event)"></app-header>
     <app-manejo-tareas *ngIf="formActivado" (cierraForm)="cerrarAddTask()" [editar]="editar" [index]="index" id="manejoTareas"></app-manejo-tareas>
     <app-lista-tareas (activaFormulario)="editarTarea($event)"></app-lista-tareas>
-    <button (click)="calculaFecha()">calcular</button>
   </div>
 

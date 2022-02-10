@@ -9,5 +9,5 @@
         </div>
     </div>
     <p class="mb-0">Hasta: {{unaTarea.getFechaLimite().getFullDateString()}}</p>
-    <p *ngIf="unaTarea.getReminder()" class="m-0 p-0">vencimiento en: <span class="text-danger">{{unaTarea.getFechaLimite().diasDiferencia()}} dias</span></p>
+    <p *ngIf="unaTarea.getReminder()" class="m-0 p-0">Vencimiento en: <span class="text-danger">{{unaTarea.getFechaLimite().diasDiferencia()}} dias</span></p>
 </div>

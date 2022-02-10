@@ -34,10 +34,6 @@ export class AppComponent {
     this.formActivado=true;
 
   }
-  calculaFecha(){
-    const fecha = new Fecha(15,3,2020);
-    alert(fecha.diasDiferencia());
-  }
   cerrarAddTask(){
    
     this.formActivado=false
