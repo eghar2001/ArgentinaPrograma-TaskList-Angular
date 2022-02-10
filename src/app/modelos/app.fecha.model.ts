@@ -65,8 +65,6 @@ export class Fecha{
         diasDiferencia += mesesMedios.reduce((acum,mes)=>{return acum += Fecha.cantidadDias(mes)},0);//sumo meses diferencia       
         diasDiferencia  += positivo?this.dia-Fecha.FechaActual.getDia():Fecha.FechaActual.getDia()-this.dia;//No le sumo el Math Abs porque da siempre positivo, y no le puedo cambiar el signo mas adelante
         diasDiferencia = positivo?diasDiferencia:-diasDiferencia;
-        let aniosBisiestos:number[] = aniosMedios.filter(anio=>esBisiesto(anio));
-        alert(aniosBisiestos);
         return diasDiferencia;
     }
     public getMesString(){
