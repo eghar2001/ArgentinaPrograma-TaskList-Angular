@@ -5,9 +5,11 @@ import { Fecha } from "./app.fecha.model";
 export class Tarea {
     private titulo:string;
     private fechaLimite:Fecha;
-    constructor(titulo:string,fecha:Fecha){
+    private reminder:boolean;
+    constructor(titulo:string,fecha:Fecha,reminder:boolean){
         this.titulo=titulo;
         this.fechaLimite=fecha;
+        this.reminder=reminder;
     }
     public getTitulo(){
         return this.titulo;
@@ -15,12 +17,19 @@ export class Tarea {
     public getFechaLimite(){
         return this.fechaLimite;
     }
+    public getReminder(){
+        return this.reminder
+    }
     public setTitulo(title:string){
         this.titulo = title;
     }
     public setFechaLimite(fecha:Fecha){
         this.fechaLimite = fecha;
     }
+    public setReminder(reminder:boolean){
+        this.reminder = reminder;
+    }
+    
     
 
     

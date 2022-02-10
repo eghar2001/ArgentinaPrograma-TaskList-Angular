@@ -32,44 +32,42 @@ export class Fecha{
             return 0;
         }
     }
-    public diasDiferencia (fecha:Fecha):number{
-        const meses:number[] =[1,2,3,4,5,6,7,8,9,10,11,12];
+    public diasDiferencia ():number{
+       const positivo =this.diaValido();
+       //Funcion que verifica si un año es bisiesto
         const esBisiesto = (anio:number) => {
             return ((anio%4===0 && !(anio%100===0) ) || (anio%400===0))
         }
         let aniosMedios:number[]=[];
         let mesesMedios:number[]=[];
-        if (fecha.getAnio()>this.anio){
-            for(let anio = this.anio +1;anio<fecha.getAnio();anio++){
+        if (positivo){
+            for(let anio = Fecha.FechaActual.getAnio() ;anio<this.anio;anio++){
                 aniosMedios.push(anio)
             }            
-            let mes:number = this.mes ;
-            while (mes!==fecha.getMes()){
-                mesesMedios.push(mes);
-                mes = mes === 12 ? 1: mes+1;
-            }
-
-
-
-        }
-        else if(this.anio>fecha.getAnio()){
-            for(let i = fecha.getAnio() +1;i<this.anio;i++){
-                aniosMedios.push(i)
-            }
-            let mes:number = fecha.getMes();
-            while (mes!==this.mes){
+            let mes:number = Fecha.FechaActual.getMes() ;
+            while (mes!==this.mes ){
                 mesesMedios.push(mes);
                 mes = mes === 12 ? 1: mes+1;
             }
         }
-
-        let diasDiferencia = aniosMedios.reduce((acum,anio)=>{return acum += (esBisiesto(anio)?366:365)}, 0);//sumo años diferencia
-    
-        diasDiferencia += mesesMedios.reduce((acum,mes)=>{return acum += Fecha.cantidadDias(mes)},0);//sumo meses diferencia
-       
-        diasDiferencia  += Math.abs(this.dia-fecha.getDia());
+        else {
+            for(let anio = Fecha.FechaActual.getAnio();anio>this.anio;anio--){
+               
+                aniosMedios.push(anio)
+            }
+            let mes:number = Fecha.FechaActual.getMes();
+            while (mes!==this.mes){               
+                mesesMedios.push(mes);
+                mes = mes === 12 ? 1: mes+1;
+            }
+        }
+        let diasDiferencia = aniosMedios.reduce((acum,anio)=>{return acum += (esBisiesto(anio)?366:365)}, 0);//sumo años diferencia    
+        diasDiferencia += mesesMedios.reduce((acum,mes)=>{return acum += Fecha.cantidadDias(mes)},0);//sumo meses diferencia       
+        diasDiferencia  += positivo?this.dia-Fecha.FechaActual.getDia():Fecha.FechaActual.getDia()-this.dia;//No le sumo el Math Abs porque da siempre positivo, y no le puedo cambiar el signo mas adelante
+        diasDiferencia = positivo?diasDiferencia:-diasDiferencia;
+        let aniosBisiestos:number[] = aniosMedios.filter(anio=>esBisiesto(anio));
+        alert(aniosBisiestos);
         return diasDiferencia;
-
     }
     public getMesString(){
         let mesString:string;

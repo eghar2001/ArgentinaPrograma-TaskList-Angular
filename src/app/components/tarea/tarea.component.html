@@ -1,5 +1,5 @@
-<div class="container border border-3 border-top-0 border-end-0 border-bottom-0 rounded border-warning  bg-light py-1 mt-2"  >
-    <div class="row justify-content-around">
+<div class="container bg-light py-2 d-flex flex-column justify-content-center mt-2" [ngClass]="{' border border-3 border-top-0 border-end-0 border-bottom-0 rounded border-warning ':unaTarea.getReminder()}">
+    <div class="row justify-content-around ">
         <div class="col-9 justify-content-start"> 
             <h3 class="d-inline-block">{{unaTarea.getTitulo()}}</h3>
         </div>
@@ -8,5 +8,6 @@
         <i class="bx bxs-edit bx-md bx-tada-hover text-primary" (click)="cargaEditar()"></i>
         </div>
     </div>
-    <p>Hasta: {{unaTarea.getFechaLimite().getFullDateString()}}</p>
+    <p class="mb-0">Hasta: {{unaTarea.getFechaLimite().getFullDateString()}}</p>
+    <p *ngIf="unaTarea.getReminder()" class="m-0 p-0">vencimiento en: <span class="text-danger">{{unaTarea.getFechaLimite().diasDiferencia()}} dias</span></p>
 </div>

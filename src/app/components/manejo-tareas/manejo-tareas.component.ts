@@ -20,28 +20,31 @@ export class ManejoTareasComponent implements OnInit {
   diasMaximos:number=31;
   fechaActual:Fecha;
   tareaActual:Tarea ;
+  reminder:boolean = false;
   actualizaDiasMaximos(){
     this.diasMaximos = Fecha.cantidadDias(this.Mes?.value);
-    
  
   }
   ngOnInit(): void {
-    this.tareaActual = this.misTareas.buscarTarea(this.index)
+   
+    this.tareaActual = this.misTareas.buscarTarea(this.index);
+    
     this.manejarTareas = this.formBuilder.group({
       titulo:[this.editar?this.tareaActual.getTitulo():'',[Validators.required]],
       diaLimite:[this.editar?this.tareaActual.getFechaLimite().getDia():null,[Validators.required,Validators.min(1)]],
       mesLimite:[this.editar?this.tareaActual.getFechaLimite().getMes():null,[Validators.required,Validators.min(1),Validators.max(12)]],
-      anioLimite:[this.editar?this.tareaActual.getFechaLimite().getAnio():null,[Validators.required,Validators.min(this.fechaActual.getAnio())]]
+      anioLimite:[this.editar?this.tareaActual.getFechaLimite().getAnio():null,[Validators.required,Validators.min(this.fechaActual.getAnio())]],
+      recordatorio:[this.editar?this.tareaActual.getReminder():false]
     })
   }
  
 
   constructor(private formBuilder:FormBuilder,private misTareas:TareasService) { 
-    this.fechaActual = Fecha.FechaActual;
-    
-   
+    this.fechaActual = Fecha.FechaActual;   
   }
-  
+  actualizaReminder(){
+    this.reminder = !this.reminder;
+  }
   get Titulo(){
     return this.manejarTareas.get("titulo")
   }
@@ -106,7 +109,7 @@ export class ManejoTareasComponent implements OnInit {
     if(this.manejarTareas.valid &&this.mesValido(mes,anio) &&  (this.diaValido(dia,mes,anio)) )  {
       const titulo:string = this.Titulo?.value;
       const fechaIngresada = new Fecha(dia,mes,anio);
-      const tarea:Tarea = new Tarea(titulo, fechaIngresada);
+      const tarea:Tarea = new Tarea(titulo, fechaIngresada,this.reminder);
       this.misTareas.agregarTarea(tarea);
       this.cierraForm.emit()
     }
@@ -114,6 +117,7 @@ export class ManejoTareasComponent implements OnInit {
       this.manejarTareas.markAllAsTouched
     }
   }
+
   modificar(evento:Event){
     evento.preventDefault;
     const anio:number = this.Anio?.value;
@@ -124,7 +128,7 @@ export class ManejoTareasComponent implements OnInit {
     if(this.manejarTareas.valid &&this.mesValido(mes,anio) &&  (this.diaValido(dia,mes,anio)) )  {
       const titulo:string = this.Titulo?.value;
       const fechaIngresada = new Fecha(dia,mes,anio);
-      const tarea:Tarea = new Tarea(titulo, fechaIngresada);
+      const tarea:Tarea = new Tarea(titulo, fechaIngresada,this.reminder);
       this.misTareas.editarTarea(this.index,tarea);  
       this.cierraForm.emit();
     }

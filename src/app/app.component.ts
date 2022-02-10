@@ -20,20 +20,23 @@ export class AppComponent {
     this.editar=false;
     this.index=0;
   }
-  
-  public cambiaBoton(){
-    this.formActivado=true;
+  cambiaBoton(){
+    this.formActivado=false;
   }
   estadoFormulario(estado:boolean){
+    
+    this.formActivado=estado;
     if(estado){
       this.editar=false;
     }
-    this.formActivado=estado;
-
   }
   mostrarAddTask(){
+    this.formActivado=true;
 
-    this.formActivado=true
+  }
+  calculaFecha(){
+    const fecha = new Fecha(15,3,2020);
+    alert(fecha.diasDiferencia());
   }
   cerrarAddTask(){
    

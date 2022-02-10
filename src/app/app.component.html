@@ -1,8 +1,8 @@
 
   <div class="container p-3  mb-3 border border-3 border-dark rounded" id="contenedor">
     <app-header [formActivado]="formActivado" (botonFormulario)="estadoFormulario($event)"></app-header>
-    <app-manejo-tareas *ngIf="formActivado" (cierraForm)="cerrarAddTask()" [editar]="editar" [index]="index"></app-manejo-tareas>
+    <app-manejo-tareas *ngIf="formActivado" (cierraForm)="cerrarAddTask()" [editar]="editar" [index]="index" id="manejoTareas"></app-manejo-tareas>
     <app-lista-tareas (activaFormulario)="editarTarea($event)"></app-lista-tareas>
-    
+    <button (click)="calculaFecha()">calcular</button>
   </div>
 

@@ -10,10 +10,10 @@ export class TareasService {
   private tareas:Tarea[];
   constructor() {    
     this.tareas= [
-      new Tarea("Nacer", new Fecha(9,12,2001)),
-      new Tarea("Terminar Task List",new Fecha(6,2,2022)),
-      new Tarea("Romper un McDonald",new Fecha(12,12,2012)),
-      new Tarea("Dia historico para el futbol Argentino",new Fecha(24,12,1889)),
+      new Tarea("Nacer", new Fecha(9,12,2001),false),
+      new Tarea("Terminar Task List",new Fecha(6,2,2022),true),
+      new Tarea("Romper un McDonald",new Fecha(12,12,2012),false),
+      new Tarea("Dia historico para el futbol Argentino",new Fecha(24,12,1889),true),
     ]
    }
    public buscarTarea(ind:number){

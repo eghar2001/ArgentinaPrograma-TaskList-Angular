@@ -2,16 +2,11 @@
     background-color: white;
     min-width:600px;
 }
-.form-container{
-    animation-name:aparecer;
-    animation-duration:2s;
+.animacion{
+    transform: translateY(100%);
+    transition:transform ease-out 0.7s;
     
 }
-@keyframes aparecer{
-    0%{
-        height:0%;
-    }
-    100%{
-        height:100%;
-    }
+.animacion.abierta{
+    transform:translateY(0);
 }
