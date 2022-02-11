@@ -1,3 +1,16 @@
 .about{
-    min-height: 400px;
+    
+    overflow: hidden;
+
+}
+.imagen{
+    width: 200%;
+    height: 200%;
+    object-position: center center;
+}
+.imgContainer{
+   
+   overflow:hidden;
+    height: 200px;
+    width:200px
 }
