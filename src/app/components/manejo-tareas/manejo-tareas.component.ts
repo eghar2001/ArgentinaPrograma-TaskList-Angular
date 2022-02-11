@@ -7,7 +7,6 @@ import { trigger,style,transition,animate,state } from '@angular/animations';
 import { TareasService } from 'src/app/servicios/tareas/tareas.service';
 
 
-
 @Component({
   selector: 'app-manejo-tareas',
   templateUrl: './manejo-tareas.component.html',

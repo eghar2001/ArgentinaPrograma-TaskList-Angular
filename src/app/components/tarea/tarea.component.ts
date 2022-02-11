@@ -33,13 +33,14 @@ const duracionAnim:string='2s'
 })
 export class TareaComponent implements OnInit {
   @Input() unaTarea:Tarea;
-  @Input() estadoAnimTask:number;
+ 
   @Output() onEditar= new EventEmitter<Tarea>();
   @Output() onDelete = new EventEmitter<Tarea>();
   fechaLimite:Fecha;
+  estadoAnimTask:number;
  
   constructor(private misTareas:TareasService) { 
-    
+    this.estadoAnimTask=1;
   }
   cargaEditar(){
     this.onEditar.emit(this.unaTarea);

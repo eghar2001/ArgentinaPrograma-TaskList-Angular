@@ -7,10 +7,26 @@ import { TareasService } from 'src/app/servicios/tareas/tareas.service';
   selector: 'app-lista-tareas',
   templateUrl: './lista-tareas.component.html',
   styleUrls: ['./lista-tareas.component.css'],
- 
+  animations:[
+    trigger('sube-baja',[
+      
+      state('bajado',style({
+        transform:'translateY(320px)'
+      })),
+      state('subido',style({
+        transform:'translateY(0)'
+      })),
+      state('vuelve',style({
+        transform:'translateY(-320px)'
+      })),
+      transition('subido => bajado',animate('0.199999s')),
+      transition('subido => vuelve',animate('0.199999s'))
+    ]),
+      
+    
+    ]
 })
 export class ListaTareasComponent implements OnInit {
-  
   
   tareas:Tarea[]
   editar:boolean;
@@ -18,7 +34,7 @@ export class ListaTareasComponent implements OnInit {
   animForm:boolean;
   tareaEdit:Tarea;
   lastIdDisp:number;
-  
+  animLista:number =3;
   constructor(private misTareas:TareasService) {
    
    }
@@ -28,10 +44,28 @@ export class ListaTareasComponent implements OnInit {
     );
     this.editar = false;
     this.formActivado=false;
-    this.animForm = false;
+    this.animLista = 1;
     this.lastIdDisp = this.tareas[(this.tareas.length)-1].id + 1;
    
   }   
+  mostrarAddTask(){
+    this.animLista=2;
+    setTimeout(()=>this.animLista=1,200);
+    setTimeout(()=>{
+      this.formActivado=true; 
+      this.animForm=true
+      
+    },200);    
+  }
+  cerrarAddTask(){
+    this.animForm = false;
+    this.animLista =3;
+    setTimeout(()=>this.animLista=1,200);
+
+    
+    setTimeout(()=>{this.formActivado=false},220)
+  }
+
   borrarTarea(tarea:Tarea){
     this.misTareas.eliminaTarea(tarea).subscribe(()=>{
       this.tareas = this.tareas.filter((t)=>t.id != tarea.id)
@@ -43,21 +77,15 @@ export class ListaTareasComponent implements OnInit {
   estadoFormulario(estado:boolean){
     if(estado){
       this.editar=false;
-      this.formActivado=true;
-      this.animForm=true;
+      this.mostrarAddTask()
+      
     }
     else{
-      this.animForm = false;
-      setTimeout(()=>{this.formActivado=false},220)
+      this.cerrarAddTask();
     }
    
   }
-  mostrarAddTask(){
-    
-    this.formActivado=true;
-    this.animForm = true;
-    
-  }
+  
   private indexTarea(ind:number){
     let i=0;
     while(i<this.tareas.length && this.tareas[i].id !== ind){
@@ -80,17 +108,18 @@ export class ListaTareasComponent implements OnInit {
       this.misTareas.agregarTarea(tarea).subscribe((t)=>{setTimeout(()=>(this.tareas.push(t)),800)})
       this.lastIdDisp++;
     }
-    this.animForm=false;
-    setTimeout(()=>{this.formActivado=false},520)
+   
 
   }
   
   editarTarea(tarea:Tarea){
     
     this.editar=true;
-    this.formActivado=true; 
-    this.animForm=true;
+    this.mostrarAddTask();
     this.tareaEdit=tarea;
+    
+    
+    
   }
 
 }
