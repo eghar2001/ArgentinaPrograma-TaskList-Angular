@@ -1,4 +1,4 @@
-<div class="container relativo py-2 d-flex flex-column justify-content-center mt-2  bg-light" [ngClass]="{'border border-3 border-top-0 border-end-0 border-bottom-0 rounded border-warning':unaTarea.reminder}">
+<div [@open-deleted]="estadoAnimTask ==1 ?'noExiste':estadoAnimTask ==2?'open':'deleted'" class="container relativo py-2 d-flex flex-column justify-content-center mt-2  bg-light" [ngClass]="{'border border-3 border-top-0 border-end-0 border-bottom-0 rounded border-warning':unaTarea.reminder}">
   
     <div class="row justify-content-around ">
         

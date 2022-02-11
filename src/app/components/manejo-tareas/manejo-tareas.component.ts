@@ -16,21 +16,21 @@ import { TareasService } from 'src/app/servicios/tareas/tareas.service';
     trigger('openClose',[
       state('*',style({
         
-        transform:'translateX(-100%)',
+        transform:'scale(0.2)',
         
         
       })),
       state('open',style({
       display:'block',
-        transform:'translateX(0)'
+        transform:'scale(1)'
         
         
       })),
       transition('* => open',[
-        animate('0.5s ease-in')
+        animate('0.2s ease-in')
       ]),
       transition('open => *',[
-        animate('0.5s ease-out')
+        animate('0.2s ease-out')
       ])
     ])
   ]

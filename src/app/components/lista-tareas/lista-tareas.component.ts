@@ -48,7 +48,7 @@ export class ListaTareasComponent implements OnInit {
     }
     else{
       this.animForm = false;
-      setTimeout(()=>{this.formActivado=false},520)
+      setTimeout(()=>{this.formActivado=false},220)
     }
    
   }
@@ -77,7 +77,7 @@ export class ListaTareasComponent implements OnInit {
       )
     }
     else{
-      this.misTareas.agregarTarea(tarea).subscribe((t)=>{this.tareas.push(t)})
+      this.misTareas.agregarTarea(tarea).subscribe((t)=>{setTimeout(()=>(this.tareas.push(t)),800)})
       this.lastIdDisp++;
     }
     this.animForm=false;
