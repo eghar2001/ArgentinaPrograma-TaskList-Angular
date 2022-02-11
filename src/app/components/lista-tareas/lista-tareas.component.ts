@@ -76,8 +76,9 @@ export class ListaTareasComponent implements OnInit {
   }
   estadoFormulario(estado:boolean){
     if(estado){
+      
+      this.mostrarAddTask();
       this.editar=false;
-      this.mostrarAddTask()
       
     }
     else{
@@ -99,15 +100,17 @@ export class ListaTareasComponent implements OnInit {
     if (this.editar){
       this.misTareas.editarTarea(tarea).subscribe((t)=>{
         const indexT:number = this.indexTarea(t.id)
-        alert(indexT);
         this.tareas.splice(indexT,1,tarea)
       }
       )
     }
     else{
-      this.misTareas.agregarTarea(tarea).subscribe((t)=>{setTimeout(()=>(this.tareas.push(t)),800)})
+      this.misTareas.agregarTarea(tarea).subscribe((t)=>{setTimeout(()=>(this.tareas.push(t)),100)})
       this.lastIdDisp++;
+     
     }
+    this.cerrarAddTask();
+    this.editar = false;
    
 
   }
