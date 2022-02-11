@@ -2,6 +2,6 @@
     <app-header [formActivado]="formActivado" (onBotonForm)="estadoFormulario($event)"></app-header>
     <app-manejo-tareas *ngIf="formActivado" [lastId]="lastIdDisp" [unaTarea]="tareaEdit" [animForm]="animForm" [editar]="editar" (cierraForm)="enviaForm($event)"></app-manejo-tareas>
     <div [@sube-baja]="animLista==1?'subido':animLista==2?'bajado':'vuelve'" >
-        <app-tarea *ngFor="let tarea of tareas" [unaTarea]="tarea"  (onDelete)="borrarTarea($event)" (onEditar)="editarTarea($event)"  ></app-tarea>
+        <app-tarea *ngFor="let tarea of tareas" [unaTarea]="tarea"  (onDelete)="borrarTarea($event)" (onEditar)="editarTarea($event)"></app-tarea>
     </div>
 </main>

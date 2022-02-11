@@ -41,6 +41,7 @@ export class TareaComponent implements OnInit {
  
   constructor(private misTareas:TareasService) { 
     this.estadoAnimTask=1;
+
   }
   cargaEditar(){
     this.onEditar.emit(this.unaTarea);

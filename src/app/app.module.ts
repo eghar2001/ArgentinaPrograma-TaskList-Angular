@@ -3,14 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { AppComponent } from './app.component';
 
-import { TareasService } from './servicios/tareas/tareas.service';
 
-import { ManejoTareasComponent } from './components/manejo-tareas/manejo-tareas.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http'
-import { TareaComponent } from './components/tarea/tarea.component';
-import { HeaderComponent } from './components/header/header.component';
+
 import { ListaTareasComponent } from './components/lista-tareas/lista-tareas.component';
+import { AboutComponent } from './components/about/about.component';
+import { AppRoutingModule } from './app-routing/app-routing.module';
+import { HeaderComponent } from './components/lista-tareas/header/header.component';
+import { ManejoTareasComponent } from './components/lista-tareas/manejo-tareas/manejo-tareas.component';
+import { TareaComponent } from './components/lista-tareas/tarea/tarea.component';
+import { TareasService } from './servicios/tareas/tareas.service';
 
 
 
@@ -19,18 +22,21 @@ import { ListaTareasComponent } from './components/lista-tareas/lista-tareas.com
 
 @NgModule({
   declarations: [
-    AppComponent,    
-    ManejoTareasComponent,    
-    TareaComponent,
+    AppComponent,   
+    TareaComponent,  
     HeaderComponent,
-    ListaTareasComponent
+    ManejoTareasComponent,
+   
+    ListaTareasComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
 
   ],
   providers: [TareasService],

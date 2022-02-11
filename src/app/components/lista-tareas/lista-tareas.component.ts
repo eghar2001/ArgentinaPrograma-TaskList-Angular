@@ -35,12 +35,16 @@ export class ListaTareasComponent implements OnInit {
   tareaEdit:Tarea;
   lastIdDisp:number;
   animLista:number =3;
-  constructor(private misTareas:TareasService) {
+  constructor(private misTareas:TareasService
+    
+    ) {
    
    }
    ngOnInit(): void {
-    this.misTareas.getTareas().subscribe((tasks)=>
-      this.tareas = tasks
+    this.misTareas.getTareas().subscribe((tasks)=>{
+      this.tareas = tasks;
+    }
+   
     );
     this.editar = false;
     this.formActivado=false;
