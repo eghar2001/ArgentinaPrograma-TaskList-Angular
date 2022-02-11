@@ -68,10 +68,11 @@
 
     </div>
     
-        
+    
     <div>
-        <button *ngIf="editar" type="submit" (click)="modificar($event)" class="btn btn-primary mt-3">Editar</button>
-        <button *ngIf="!editar"type="submit" (click)="agregar($event)" class="btn btn-success mt-3">Agregar</button>
+        <button [hidden]="editar"  (click)="agregar($event)" class="btn btn-success mt-3">Agregar</button>
+        <button [hidden]="!editar"  (click)="modificar($event)" class="btn btn-primary mt-3">Editar</button>
+        
     </div>
-
+    
 </form>

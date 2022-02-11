@@ -1,8 +1,7 @@
 
   <div class="container p-3  mb-3 border border-3 border-dark rounded" id="contenedor">
-    <app-header [formActivado]="formActivado" (botonFormulario)="estadoFormulario($event)"></app-header>
-    <app-manejo-tareas *ngIf="formActivado" (cierraForm)="cerrarAddTask()" [editar]="editar" [index]="index" [animForm]="animForm" id="manejoTareas"></app-manejo-tareas>
-    <app-lista-tareas (activaFormulario)="editarTarea($event)" [animForm]="animForm"></app-lista-tareas>
-    <button (click)="fechaJson()"></button>
+    
+    <app-lista-tareas ></app-lista-tareas>
+
   </div>
   

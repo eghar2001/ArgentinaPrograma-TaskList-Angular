@@ -16,13 +16,7 @@ export class Fecha{
     public getAnio(){
         return this.anio;
     }
-    public jsonifyFecha(){
-        return {
-            "dia":`${this.dia}`,
-            "mes":`${this.mes}`,
-            "anio":`${this.anio}`
-        }
-    }
+   
     static cantidadDias(mes:number):number{
         const dias30:number[] = [4,6,9,11];
         const dias31:number[] = [1,3,5,7,8,10,12]
@@ -39,7 +33,7 @@ export class Fecha{
             return 0;
         }
     }
-    public diasDiferencia ():number{
+    public diasDiferencia():number{
        const positivo =this.diaValido();
        //Funcion que verifica si un año es bisiesto
         const esBisiesto = (anio:number) => {

@@ -7,7 +7,7 @@ import { TareasService } from './servicios/tareas/tareas.service';
 
 import { ManejoTareasComponent } from './components/manejo-tareas/manejo-tareas.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import {HttpClientModule} from '@angular/common/http'
 import { TareaComponent } from './components/tarea/tarea.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ListaTareasComponent } from './components/lista-tareas/lista-tareas.component';
@@ -30,6 +30,7 @@ import { ListaTareasComponent } from './components/lista-tareas/lista-tareas.com
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule
 
   ],
   providers: [TareasService],

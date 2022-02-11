@@ -37,28 +37,28 @@ import { TareasService } from 'src/app/servicios/tareas/tareas.service';
 })
 export class ManejoTareasComponent implements OnInit {
   @Input() editar:boolean;
-  @Input() index:number;
+  @Input() unaTarea:Tarea;
   @Input() animForm:boolean;
-  @Output() cierraForm = new EventEmitter();
+  @Input() lastId:number;
+  @Output() cierraForm = new EventEmitter<Tarea>();
   manejarTareas:FormGroup;
   diasMaximos:number=31;
   fechaActual:Fecha;
-  tareaActual:Tarea ;
+  
+  
   reminder:boolean = false;
   actualizaDiasMaximos(){
     this.diasMaximos = Fecha.cantidadDias(this.Mes?.value);
  
   }
   ngOnInit(): void {
-   
-    this.tareaActual = this.misTareas.buscarTarea(this.index);
     
     this.manejarTareas = this.formBuilder.group({
-      titulo:[this.editar?this.tareaActual.getTitulo():'',[Validators.required]],
-      diaLimite:[this.editar?this.tareaActual.getFechaLimite().getDia():null,[Validators.required,Validators.min(1)]],
-      mesLimite:[this.editar?this.tareaActual.getFechaLimite().getMes():null,[Validators.required,Validators.min(1),Validators.max(12)]],
-      anioLimite:[this.editar?this.tareaActual.getFechaLimite().getAnio():null,[Validators.required,Validators.min(this.fechaActual.getAnio())]],
-      recordatorio:[this.editar?this.tareaActual.getReminder():false]
+      titulo:[this.editar?this.unaTarea.titulo:'',[Validators.required]],
+      diaLimite:[this.editar?this.unaTarea.fechaLimite.dia:null,[Validators.required,Validators.min(1)]],
+      mesLimite:[this.editar?this.unaTarea.fechaLimite.mes:null,[Validators.required,Validators.min(1),Validators.max(12)]],
+      anioLimite:[this.editar?this.unaTarea.fechaLimite.anio:null,[Validators.required,Validators.min(this.fechaActual.getAnio())]],
+      recordatorio:[this.editar?this.unaTarea.reminder:false]
     })
   }
  
@@ -66,6 +66,7 @@ export class ManejoTareasComponent implements OnInit {
   constructor(private formBuilder:FormBuilder,private misTareas:TareasService) { 
     this.fechaActual = Fecha.FechaActual;   
   }
+ 
   actualizaReminder(){
     this.reminder = !this.reminder;
   }
@@ -132,10 +133,18 @@ export class ManejoTareasComponent implements OnInit {
     
     if(this.manejarTareas.valid &&this.mesValido(mes,anio) &&  (this.diaValido(dia,mes,anio)) )  {
       const titulo:string = this.Titulo?.value;
-      const fechaIngresada = new Fecha(dia,mes,anio);
-      const tarea:Tarea = new Tarea(titulo, fechaIngresada,this.reminder);
-      this.misTareas.agregarTarea(tarea);
-      this.cierraForm.emit()
+      const fechaIngresada = new Fecha(dia,mes,anio);     
+      const tarea:Tarea = {
+        "id":this.lastId,
+        "titulo":titulo,
+        fechaLimite:{
+          "dia":dia,
+          "mes":mes,
+          "anio":anio
+        },
+        "reminder":this.reminder
+    }
+    this.cierraForm.emit(tarea);
     }
     else{
       this.manejarTareas.markAllAsTouched
@@ -151,10 +160,17 @@ export class ManejoTareasComponent implements OnInit {
     
     if(this.manejarTareas.valid &&this.mesValido(mes,anio) &&  (this.diaValido(dia,mes,anio)) )  {
       const titulo:string = this.Titulo?.value;
-      const fechaIngresada = new Fecha(dia,mes,anio);
-      const tarea:Tarea = new Tarea(titulo, fechaIngresada,this.reminder);
-      this.misTareas.editarTarea(this.index,tarea);  
-      this.cierraForm.emit();
+      const tarea:Tarea = {
+          "id":this.unaTarea.id,
+          "titulo":titulo,
+          fechaLimite:{
+            "dia":dia,
+            "mes":mes,
+            "anio":anio
+          },
+          "reminder":this.reminder
+      }
+      this.cierraForm.emit(tarea);
     }
     else{
       this.manejarTareas.markAllAsTouched

@@ -1,0 +1,44 @@
+{
+  "tareas": [
+    {
+      "id": 0,
+      "titulo": "Nacer",
+      "fechaLimite": {
+        "dia": 9,
+        "mes": 12,
+        "anio": 2001
+      },
+      "reminder": false
+    },
+    {
+      "id": 1,
+      "titulo": "Dou",
+      "fechaLimite": {
+        "dia": 23,
+        "mes": 2,
+        "anio": 2022
+      },
+      "reminder": true
+    },
+    {
+      "id": 2,
+      "titulo": "Romper un McDonald",
+      "fechaLimite": {
+        "dia": 12,
+        "mes": 12,
+        "anio": 2012
+      },
+      "reminder": false
+    },
+    {
+      "id": 3,
+      "titulo": "Dia historico para el futbol Argentino",
+      "fechaLimite": {
+        "dia": 24,
+        "mes": 12,
+        "anio": 1889
+      },
+      "reminder": true
+    }
+  ]
+}

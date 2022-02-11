@@ -1,36 +1,40 @@
 import { Injectable } from '@angular/core';
 import { Fecha } from 'src/app/modelos/app.fecha.model';
-
+import { HttpClient,HttpHandler, HttpHeaders } from '@angular/common/http';
 import { Tarea } from 'src/app/modelos/app.tarea.model';
+import { Observable,of } from 'rxjs';
+
+const httpOptions={headers: new HttpHeaders({
+  'Content-Type':'application/json'
+})}
 
 @Injectable({
   providedIn: 'root'
 })
 export class TareasService {
-  private tareas:Tarea[];
-  constructor() {    
-    this.tareas= [
-      new Tarea("Nacer", new Fecha(9,12,2001),false),
-      new Tarea("Terminar Task List",new Fecha(6,2,2022),true),
-      new Tarea("Romper un McDonald",new Fecha(12,12,2012),false),
-      new Tarea("Dia historico para el futbol Argentino",new Fecha(24,12,1889),true),
-    ]
-   }
+  private apiUrl:string = 'http://localhost:3000/tareas'
+
+  constructor(private http:HttpClient){
+
+  }    
+    
    public buscarTarea(ind:number){
-     return this.tareas[ind];
+     
     }
-    public agregarTarea(tarea:Tarea){
-      this.tareas.push(tarea);
+    public agregarTarea(tarea:Tarea):Observable<Tarea>{
+      return this.http.post<Tarea>(this.apiUrl,tarea,httpOptions)
     }
-    public getTareas(){
-      return this.tareas;
+    public getTareas():Observable<Tarea[]>{
+      return this.http.get<Tarea[]>(this.apiUrl);
     
     }
-    public eliminaTarea(ind:number){
-      this.tareas.splice(ind,1);
+    public eliminaTarea(tarea:Tarea):Observable<Task>{
+      const url =`${this.apiUrl}/${tarea.id}`;
+       return  this.http.delete<Task>(url);
     }
-    public editarTarea(ind:number,tarea:Tarea){
-      this.tareas[ind]=tarea;
+    public editarTarea(tarea:Tarea):Observable<Tarea>{
+      const url = `${this.apiUrl}/${tarea.id}`;
+      return this.http.put<Tarea>(url,tarea,httpOptions);
     }
 
 }
