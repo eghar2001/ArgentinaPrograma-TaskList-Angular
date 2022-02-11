@@ -14,6 +14,8 @@ import { HeaderComponent } from './components/lista-tareas/header/header.compone
 import { ManejoTareasComponent } from './components/lista-tareas/manejo-tareas/manejo-tareas.component';
 import { TareaComponent } from './components/lista-tareas/tarea/tarea.component';
 import { TareasService } from './servicios/tareas/tareas.service';
+import { FooterComponent } from './components/footer/footer.component';
+
 
 
 
@@ -28,7 +30,9 @@ import { TareasService } from './servicios/tareas/tareas.service';
     ManejoTareasComponent,
    
     ListaTareasComponent,
-    AboutComponent
+    AboutComponent,
+    FooterComponent,
+    
   ],
   imports: [
     BrowserModule,

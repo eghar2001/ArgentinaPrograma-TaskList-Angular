@@ -4,8 +4,7 @@ import {RouterModule,Routes} from '@angular/router'
 import { AboutComponent } from '../components/about/about.component';
 import { ListaTareasComponent } from '../components/lista-tareas/lista-tareas.component';
 
-const routes:Routes = [
-  
+const routes:Routes = [  
   {path:'about',component:AboutComponent},
   {path:'',redirectTo:'/tasks',pathMatch:'full'},
   {path:'tasks',component:ListaTareasComponent}
